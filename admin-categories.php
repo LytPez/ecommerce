@@ -79,16 +79,20 @@ header('Location: /admin/categories');
 exit;
 });
 
-$app->get("/categories/:idcategory", function($idcategory){
+
+$app->get("/admin/categories/:idcategory/products", function($idcategory){
+  User::verifyLogin();
   $category = new Category();
 
   $category->get((int)$idcategory);
 
-  $page = new Page();
+  $page = new PageAdmin();
 
-  $page->setTpl("category", [
+  $page->setTpl("categories-products", [
     'category'=>$category->getValues(),
-    'products'=>[]
+    'productsRelated'=>$category->getProducts(),
+    'productsNotRelated'=>$category->getProducts(false)
+
   ]);
 });
 ?>
