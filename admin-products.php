@@ -70,6 +70,7 @@ $app->post("/admin/products/:idproduct", function($idproduct){
   header('Location: /admin/products');
   exit;
 });
+
 $app->get("/admin/products/:idproduct/delete", function($idproduct){
   
   User::verifyLogin();
