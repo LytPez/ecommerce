@@ -101,12 +101,12 @@ class Category extends Model{
         'idcategory'=>$this->getidcategory()
       ]);
 
-    $resultsTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal;");
+    $resultTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal;");
 
     return [
       'data'=>Product::checkList($results),
-      'total'=>(int)$resultsTotal[0]["nrtotal"],
-      'pages'=>ceil($resultsTotal[0]["nrtotal"]/$itemsPerPage)
+      'total'=>(int)$resultTotal[0]["nrtotal"],
+      'pages'=>ceil($resultTotal[0]["nrtotal"]/$itemsPerPage)
     ];
   }
 
