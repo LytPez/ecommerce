@@ -2,9 +2,12 @@
 
 use \Hcode\Model\User;
 
-function formatPrice(float $vLprice){
+function formatPrice($vlprice)
+{
 
-  return number_format($vLprice, 2, ",", ".");
+	if (!$vlprice > 0) $vlprice = 0;
+
+	return number_format($vlprice, 2, ",", ".");
 
 }
 
