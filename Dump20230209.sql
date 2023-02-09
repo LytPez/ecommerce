@@ -32,12 +32,13 @@ CREATE TABLE `tb_addresses` (
   `descity` varchar(32) NOT NULL,
   `desstate` varchar(32) NOT NULL,
   `descountry` varchar(32) NOT NULL,
-  `nrzipcode` int(11) NOT NULL,
+  `deszipcode` char(8) NOT NULL,
+  `desdistrict` varchar(32) NOT NULL,
   `dtregister` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`idaddress`),
   KEY `fk_addresses_persons_idx` (`idperson`),
   CONSTRAINT `fk_addresses_persons` FOREIGN KEY (`idperson`) REFERENCES `tb_persons` (`idperson`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,6 +47,7 @@ CREATE TABLE `tb_addresses` (
 
 LOCK TABLES `tb_addresses` WRITE;
 /*!40000 ALTER TABLE `tb_addresses` DISABLE KEYS */;
+INSERT INTO `tb_addresses` VALUES (1,1,'Rua Ana Maria Marques de Souza','','Caratinga','MG','Brasil','35300136','Nossa Senhora Aparecida','2023-02-09 16:06:12'),(2,1,'Rua Ana Maria Marques de Souza','','Caratinga','MG','Brasil','35300136','Nossa Senhora Aparecida','2023-02-09 18:11:38'),(3,1,'Rua Ana Maria Marques de Souza','','Caratinga','MG','Brasil','35300136','Nossa Senhora Aparecida','2023-02-09 18:25:54'),(4,1,'Rua Ana Maria Marques de Souza','','Caratinga','MG','Brasil','35300136','Nossa Senhora Aparecida','2023-02-09 18:27:33'),(5,1,'Rua Ana Maria Marques de Souza','','Caratinga','MG','Brasil','35300136','Nossa Senhora Aparecida','2023-02-09 18:27:44'),(6,1,'Rua Ana Maria Marques de Souza','','Caratinga','MG','Brasil','35300136','Nossa Senhora Aparecida','2023-02-09 18:38:40'),(7,1,'Rua Ana Maria Marques de Souza','','Caratinga','MG','Brasil','35300136','Nossa Senhora Aparecida','2023-02-09 18:39:04'),(8,1,'Rua Ana Maria Marques de Souza','','Caratinga','MG','Brasil','35300136','Nossa Senhora Aparecida','2023-02-09 19:57:20');
 /*!40000 ALTER TABLE `tb_addresses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -67,7 +69,7 @@ CREATE TABLE `tb_carts` (
   PRIMARY KEY (`idcart`),
   KEY `FK_carts_users_idx` (`iduser`),
   CONSTRAINT `fk_carts_users` FOREIGN KEY (`iduser`) REFERENCES `tb_users` (`iduser`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,7 +78,7 @@ CREATE TABLE `tb_carts` (
 
 LOCK TABLES `tb_carts` WRITE;
 /*!40000 ALTER TABLE `tb_carts` DISABLE KEYS */;
-INSERT INTO `tb_carts` VALUES (1,'pl3fmgljgargeac08uug7b09mk',1,NULL,NULL,NULL,'2023-02-03 19:57:40'),(2,'4eihu9uacqkuuu3v2fa5khehnk',NULL,NULL,NULL,NULL,'2023-02-07 12:04:29');
+INSERT INTO `tb_carts` VALUES (1,'pl3fmgljgargeac08uug7b09mk',1,NULL,NULL,NULL,'2023-02-03 19:57:40'),(2,'4eihu9uacqkuuu3v2fa5khehnk',NULL,NULL,NULL,NULL,'2023-02-07 12:04:29'),(3,'ghgcmva35ts56koviv1ohlbapj',NULL,'35300138',98.48,2,'2023-02-08 12:31:44'),(4,'c1862n6h1bbqmspa1erfbuoanb',NULL,'35300136',122.76,2,'2023-02-09 12:56:22');
 /*!40000 ALTER TABLE `tb_carts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,7 +100,7 @@ CREATE TABLE `tb_cartsproducts` (
   KEY `FK_cartsproducts_products_idx` (`idproduct`),
   CONSTRAINT `fk_cartsproducts_carts` FOREIGN KEY (`idcart`) REFERENCES `tb_carts` (`idcart`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_cartsproducts_products` FOREIGN KEY (`idproduct`) REFERENCES `tb_products` (`idproduct`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -107,7 +109,7 @@ CREATE TABLE `tb_cartsproducts` (
 
 LOCK TABLES `tb_cartsproducts` WRITE;
 /*!40000 ALTER TABLE `tb_cartsproducts` DISABLE KEYS */;
-INSERT INTO `tb_cartsproducts` VALUES (6,2,7,'2023-02-07 16:16:35','2023-02-07 18:19:19'),(7,2,7,'2023-02-07 16:16:35','2023-02-07 18:45:21'),(8,2,6,'2023-02-07 16:16:57','2023-02-07 19:16:41'),(9,2,6,'2023-02-07 16:20:47','2023-02-07 19:16:55'),(10,2,6,'2023-02-07 17:41:30','2023-02-07 19:20:55'),(11,2,6,'2023-02-07 17:41:30','2023-02-07 19:20:55'),(12,2,6,'2023-02-07 17:41:30','2023-02-07 19:20:55'),(13,2,7,NULL,'2023-02-07 19:21:11');
+INSERT INTO `tb_cartsproducts` VALUES (6,2,7,'2023-02-07 16:16:35','2023-02-07 18:19:19'),(7,2,7,'2023-02-07 16:16:35','2023-02-07 18:45:21'),(8,2,6,'2023-02-07 16:16:57','2023-02-07 19:16:41'),(9,2,6,'2023-02-07 16:20:47','2023-02-07 19:16:55'),(10,2,6,'2023-02-07 17:41:30','2023-02-07 19:20:55'),(11,2,6,'2023-02-07 17:41:30','2023-02-07 19:20:55'),(12,2,6,'2023-02-07 17:41:30','2023-02-07 19:20:55'),(13,2,7,NULL,'2023-02-07 19:21:11'),(14,3,6,'2023-02-08 10:27:52','2023-02-08 12:32:19'),(15,3,10,'2023-02-08 11:07:03','2023-02-08 13:27:48'),(16,3,10,'2023-02-08 11:07:13','2023-02-08 14:06:59'),(17,3,10,'2023-02-08 11:07:23','2023-02-08 14:07:09'),(18,3,10,'2023-02-08 17:19:12','2023-02-08 14:07:18'),(19,3,10,'2023-02-08 17:19:12','2023-02-08 14:07:21'),(20,4,4,'2023-02-09 10:05:00','2023-02-09 12:56:28'),(21,4,10,'2023-02-09 11:54:29','2023-02-09 13:05:10'),(22,4,10,'2023-02-09 11:54:29','2023-02-09 13:12:39'),(23,4,7,'2023-02-09 12:49:04','2023-02-09 14:54:26'),(24,4,6,NULL,'2023-02-09 15:49:08'),(25,4,8,NULL,'2023-02-09 19:57:11');
 /*!40000 ALTER TABLE `tb_cartsproducts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -148,16 +150,19 @@ CREATE TABLE `tb_orders` (
   `idcart` int(11) NOT NULL,
   `iduser` int(11) NOT NULL,
   `idstatus` int(11) NOT NULL,
+  `idaddress` int(11) NOT NULL,
   `vltotal` decimal(10,2) NOT NULL,
   `dtregister` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`idorder`),
-  KEY `FK_orders_carts_idx` (`idcart`),
   KEY `FK_orders_users_idx` (`iduser`),
   KEY `fk_orders_ordersstatus_idx` (`idstatus`),
+  KEY `fk_orders_carts_idx` (`idcart`),
+  KEY `fk_orders_addresses_idx` (`idaddress`),
+  CONSTRAINT `fk_orders_addresses` FOREIGN KEY (`idaddress`) REFERENCES `tb_addresses` (`idaddress`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_orders_carts` FOREIGN KEY (`idcart`) REFERENCES `tb_carts` (`idcart`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_orders_ordersstatus` FOREIGN KEY (`idstatus`) REFERENCES `tb_ordersstatus` (`idstatus`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_orders_users` FOREIGN KEY (`iduser`) REFERENCES `tb_users` (`iduser`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -166,6 +171,7 @@ CREATE TABLE `tb_orders` (
 
 LOCK TABLES `tb_orders` WRITE;
 /*!40000 ALTER TABLE `tb_orders` DISABLE KEYS */;
+INSERT INTO `tb_orders` VALUES (1,4,1,1,6,93.98,'2023-02-09 18:38:41'),(2,4,1,1,7,93.98,'2023-02-09 18:39:04'),(3,4,1,1,8,2556.99,'2023-02-09 19:57:20');
 /*!40000 ALTER TABLE `tb_orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -208,7 +214,7 @@ CREATE TABLE `tb_persons` (
   `nrphone` bigint(20) DEFAULT NULL,
   `dtregister` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`idperson`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -217,7 +223,7 @@ CREATE TABLE `tb_persons` (
 
 LOCK TABLES `tb_persons` WRITE;
 /*!40000 ALTER TABLE `tb_persons` DISABLE KEYS */;
-INSERT INTO `tb_persons` VALUES (1,'JoÃ£o Rangel','admin@hcode.com.br',2147483647,'2017-03-01 03:00:00'),(7,'Suporte','suporte@hcode.com.br',1112345678,'2017-03-15 16:10:27'),(10,'Guilherme S','ggtest196@gmail.com',112345678,'2023-01-31 15:31:28'),(11,'Guilher','dev01@sonax.net.br',111111111,'2023-02-01 14:57:39');
+INSERT INTO `tb_persons` VALUES (1,'João Rangel','admin@hcode.com.br',2147483647,'2017-03-01 03:00:00'),(7,'Suporte','suporte@hcode.com.br',1112345678,'2017-03-15 16:10:27'),(10,'Guilherme S','ggtest196@gmail.com',112345678,'2023-01-31 15:31:28'),(11,'Guilher','dev01@sonax.net.br',111111111,'2023-02-01 14:57:39'),(12,'Guilherme','dev01@sonax.net.br',0,'2023-02-08 20:05:58'),(13,'bad','admin@hcode.com.br',2147483647,'2023-02-08 21:11:09');
 /*!40000 ALTER TABLE `tb_persons` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -296,7 +302,7 @@ CREATE TABLE `tb_users` (
   PRIMARY KEY (`iduser`),
   KEY `FK_users_persons_idx` (`idperson`),
   CONSTRAINT `fk_users_persons` FOREIGN KEY (`idperson`) REFERENCES `tb_persons` (`idperson`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -305,7 +311,7 @@ CREATE TABLE `tb_users` (
 
 LOCK TABLES `tb_users` WRITE;
 /*!40000 ALTER TABLE `tb_users` DISABLE KEYS */;
-INSERT INTO `tb_users` VALUES (1,1,'admin','$2y$12$YlooCyNvyTji8bPRcrfNfOKnVMmZA9ViM2A3IpFjmrpIbp5ovNmga',1,'2017-03-13 03:00:00'),(7,7,'suporte','$2y$12$HFjgUm/mk1RzTy4ZkJaZBe0Mc/BA2hQyoUckvm.lFa6TesjtNpiMe',1,'2017-03-15 16:10:27'),(10,10,'LytPez','Gjh180202*',1,'2023-01-31 15:31:28'),(11,11,'LytPez','Gjh180202*',1,'2023-02-01 14:57:39');
+INSERT INTO `tb_users` VALUES (1,1,'admin','$2y$12$YlooCyNvyTji8bPRcrfNfOKnVMmZA9ViM2A3IpFjmrpIbp5ovNmga',1,'2017-03-13 03:00:00'),(7,7,'suporte','$2y$12$HFjgUm/mk1RzTy4ZkJaZBe0Mc/BA2hQyoUckvm.lFa6TesjtNpiMe',1,'2017-03-15 16:10:27'),(10,10,'LytPez','Gjh180202*',1,'2023-01-31 15:31:28'),(11,11,'LytPez','Gjh180202*',1,'2023-02-01 14:57:39'),(12,12,'dev01@sonax.net.br','$2y$12$1Nb2NFAfJmZiu6sXVjxw9erbsGMqKq1ug9WRbe0MLFWPmegXsuwxa',0,'2023-02-08 20:05:58'),(13,13,'admin@hcode.com.br','$2y$12$a3rokGJN7Lv0GnOgcfNzI.fYmbyphocKXINaCf9PTvkubMcEjs8jC',1,'2023-02-08 21:11:09');
 /*!40000 ALTER TABLE `tb_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -378,4 +384,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-02-07 18:13:50
+-- Dump completed on 2023-02-09 18:29:33
