@@ -538,10 +538,18 @@ $app->get("/profile/orders/:idorder", function($idorder){
 
   $order->get((int)$idorder);
 
+  $cart = new Cart();
+
+  $cart->get((int)$order->getidcart());
+
+  $cart->getCalculateTotal();
+
   $page = new Page();
 
-  $page->setTpl("profile-orders", [
-    'orders'=>$user->getOrders()
+  $page->setTpl("profile-orders-detail", [
+    'order'=>$order->getOrders(),
+    'cart'=>$cart->getValues(),
+    'products'=>$cart->getProducts()
   ]);
 })
 
